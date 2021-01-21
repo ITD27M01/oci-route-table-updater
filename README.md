@@ -19,7 +19,7 @@ resource "null_resource" "right_route_table_update" {
   }
 
   provisioner "local-exec" {
-    command = "ortu --rt-ocid ${data.oci_core_route_tables.right_route_table.id} --cidr ${data.oci_core_vcn.left_vcn.cidr_block} --ne-ocid ${oci_core_local_peering_gateway.right_lpg.id}"
+    command = "ortu --rt-ocid ${data.oci_core_route_tables.right_route_table.route_tables[0].id} --cidr ${data.oci_core_vcn.left_vcn.cidr_block} --ne-ocid ${oci_core_local_peering_gateway.right_lpg.id}"
   }
 }
 
@@ -29,10 +29,9 @@ resource "null_resource" "left_route_table_update" {
   }
 
   provisioner "local-exec" {
-    command = "ortu --rt-ocid ${data.oci_core_route_tables.left_route_table.id} --cidr ${data.oci_core_vcn.right_vcn.cidr_block} --ne-ocid ${oci_core_local_peering_gateway.left_lpg.id}"
+    command = "ortu --rt-ocid ${data.oci_core_route_tables.left_route_table.route_tables[0].id} --cidr ${data.oci_core_vcn.right_vcn.cidr_block} --ne-ocid ${oci_core_local_peering_gateway.left_lpg.id}"
   }
 }
-
 ```
 
 ## Authentication
