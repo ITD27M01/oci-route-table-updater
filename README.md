@@ -1,5 +1,7 @@
 # Simple utility to insert route rule to OCI Route table
 
+![tests](https://github.com/ITD27M01/oci-route-table-updater/workflows/tests_workflow/badge.svg)
+
 The reason behind this utility is described here: [1251](https://github.com/terraform-providers/terraform-provider-oci/issues/1251)
 
 This simple utility is intended to update the routing table during the terraform run.
