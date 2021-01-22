@@ -3,6 +3,9 @@ import argparse
 
 def args_parser():
     parser = argparse.ArgumentParser(description='Updates OCI route table')
+    parser.add_argument('action', type=str, default='create', nargs='?', const='create', choices=['create', 'delete'],
+                        help="Action to do with route table. The default is to create rule based on specified params")
+
     parser.add_argument('--rt-ocid', type=str, action='store',
                         help='Route table OCI ID')
 
