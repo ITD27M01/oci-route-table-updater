@@ -32,10 +32,10 @@ def main():
             exit_code = 2
             raise ValueError("Both cidr and network entity id are required")
 
-        if is_route_present:
+        if (is_route_present and args.action == 'create') or (not is_route_present and args.action == 'delete'):
             _log.debug("Just sit around")
         else:
-            update_route_table(route_table, args.cidr, args.ne_ocid, args.dry_run)
+            update_route_table(route_table, args.cidr, args.ne_ocid, args.action, args.dry_run)
 
         exit_code = 0
     except Exception as e:
