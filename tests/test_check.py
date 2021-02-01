@@ -24,6 +24,11 @@ NEW_ROUTE_RULES = [
         destination='192.168.1.0/24',
         destination_type='CIDR_BLOCK',
         network_entity_id='ocid1.internetgateway.oc1.region.anotherlongcrazystring'
+    ),
+    RouteRule(
+        destination='all-fra-services-in-oracle-services-network',
+        destination_type='SERVICE_CIDR_BLOCK',
+        network_entity_id='ocid1.servicegateway.oc1.region.anotherlongcrazystringforsg'
     )
 ]
 
@@ -32,20 +37,13 @@ NEW_ROUTE_TABLE = RouteTable(
 )
 
 
-class Args:
-    def __init__(self):
-        pass
-
-    cidr = '192.168.1.0/24'
-    ne_ocid = 'ocid1.internetgateway.oc1.region.anotherlongcrazystring'
-
-
-args = Args
+CIDR = '192.168.1.0/24'
+NE_OCID = 'ocid1.internetgateway.oc1.region.anotherlongcrazystring'
 
 
 def test_check_update_needed():
-    assert not check_route(SOURCE_ROUTE_TABLE, args.cidr, args.ne_ocid)
+    assert not check_route(SOURCE_ROUTE_TABLE, CIDR, NE_OCID)
 
 
 def test_check_update_not_needed():
-    assert check_route(NEW_ROUTE_TABLE, args.cidr, args.ne_ocid)
+    assert check_route(NEW_ROUTE_TABLE, CIDR, NE_OCID)
