@@ -88,3 +88,5 @@ resource "null_resource" "default_route_table_update" {
 ## Authentication
 
 I'm using Ansible in my projects, so, this tool relies on `~/.oci/config` and `OCI_CONFIG_PROFILE` environment variable.
+
+In the case of OCI instance usage set the `OCI_CLI_AUTH` environment variable to `instance_principal` value.
