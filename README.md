@@ -1,3 +1,9 @@
+# DEPRECATION WARNING
+
+OCI has upgraded the DRG (Dynamic Router Gateway) service which simplifies the network architecture with multiple VCNs:
+
+https://docs.oracle.com/en-us/iaas/Content/Network/Tasks/scenario_d.htm#scenariod
+
 # Simple utility to insert route rule to OCI Route table
 
 ![tests](https://github.com/ITD27M01/oci-route-table-updater/workflows/tests_workflow/badge.svg)
