@@ -13,6 +13,7 @@ The reason behind this utility is described here: [1251](https://github.com/terr
 This simple utility is intended to update the routing table during the terraform run.
 It inserts the routing rule in an idempotent way (so, it checks first if exact rule is present in routing table).
 
+
 ## Examples
 
 The example usage is inside `null_resource` terraform resource after VCN peering establishment:
