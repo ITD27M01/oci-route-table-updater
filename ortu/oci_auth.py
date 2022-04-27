@@ -43,13 +43,14 @@ def _get_oci_config():
 
 def get_network_client():
     oci_config = {}
-    signer = None
 
     # https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/clienvironmentvariables.htm#environmentvariabletable
     auth_type = environ.get("OCI_CLI_AUTH", "api_key")
     if auth_type == "api_key":
         oci_config = _get_oci_config()
+
+        return core.VirtualNetworkClient(config=oci_config)
     elif auth_type == "instance_principal":
         signer = auth.signers.InstancePrincipalsSecurityTokenSigner()
 
-    return core.VirtualNetworkClient(config=oci_config, signer=signer)
+        return core.VirtualNetworkClient(config=oci_config, signer=signer)
