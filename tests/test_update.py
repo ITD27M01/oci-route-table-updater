@@ -64,6 +64,47 @@ SERVICE_ROUTE_RULES = [
     )
 ]
 
+SAME_NE_ROUTE_RULES = [
+    RouteRule(
+        destination='0.0.0.0/0',
+        destination_type='CIDR_BLOCK',
+        network_entity_id='ocid1.internetgateway.oc1.region.igid'
+    ),
+    RouteRule(
+        destination='192.168.1.0/24',
+        destination_type='CIDR_BLOCK',
+        network_entity_id='ocid1.localpeeringgateway.oc1.region.lpgid'
+    ),
+    RouteRule(
+        destination='10.1.0.0/24',
+        destination_type='CIDR_BLOCK',
+        network_entity_id='ocid1.localpeeringgateway.oc1.region.lpgid'
+    ),
+    RouteRule(
+        destination='all-fra-services-in-oracle-services-network',
+        destination_type='SERVICE_CIDR_BLOCK',
+        network_entity_id='ocid1.servicegateway.oc1.region.sgwid'
+    )
+]
+
+WO_SAME_NE_ROUTE_RULES = [
+    RouteRule(
+        destination='0.0.0.0/0',
+        destination_type='CIDR_BLOCK',
+        network_entity_id='ocid1.internetgateway.oc1.region.igid'
+    ),
+    RouteRule(
+        destination='10.1.0.0/24',
+        destination_type='CIDR_BLOCK',
+        network_entity_id='ocid1.localpeeringgateway.oc1.region.lpgid'
+    ),
+    RouteRule(
+        destination='all-fra-services-in-oracle-services-network',
+        destination_type='SERVICE_CIDR_BLOCK',
+        network_entity_id='ocid1.servicegateway.oc1.region.sgwid'
+    )
+]
+
 WO_CIDR_ROUTE_TABLE = RouteTable(
     route_rules=WO_CIDR_ROUTE_RULES
 )
@@ -76,7 +117,12 @@ ROUTE_TABLE = RouteTable(
     route_rules=SERVICE_ROUTE_RULES
 )
 
+DELETE_RULE_ROUTE_TABLE = RouteTable(
+    route_rules=SAME_NE_ROUTE_RULES
+)
+
 CIDR = '0.0.0.0/0'
+DELETE_CIDR = '192.168.1.0/24'
 IG_ID = 'ocid1.internetgateway.oc1.region.igid'
 SERVICE_CIDR = 'all-fra-services-in-oracle-services-network'
 SG_ID = 'ocid1.servicegateway.oc1.region.sgwid'
@@ -93,8 +139,8 @@ def test_create_service():
 
 
 def test_delete_cidr():
-    assert construct_update_details(ROUTE_TABLE, CIDR, IG_ID, 'delete').route_rules == \
-           WO_CIDR_ROUTE_RULES
+    assert construct_update_details(DELETE_RULE_ROUTE_TABLE, DELETE_CIDR, IG_ID, 'delete').route_rules == \
+           WO_SAME_NE_ROUTE_RULES
 
 
 def test_delete_service():

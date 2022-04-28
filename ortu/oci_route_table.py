@@ -54,10 +54,7 @@ def construct_update_details(route_table, cidr, ne_ocid, action):
     if action == 'create':
         route_rules.append(_construct_route_rule(cidr, ne_ocid))
     elif action == 'delete':
-        filtered_rules = list(filter(lambda rule: rule.destination != cidr and rule.network_entity_id != ne_ocid,
-                                     route_rules))
-
-        route_rules = filtered_rules
+        route_rules = list(filter(lambda rule: rule.destination != cidr, route_rules))
     else:
         raise ValueError(f"Action {action} is not implemented yet")
 
